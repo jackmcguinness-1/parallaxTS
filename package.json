@@ -1,0 +1,19 @@
+{
+  "name": "parallaxts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npx tsc -w"
+  },
+  "author": "jmcguinness",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "eslint-plugin-react": "^7.28.0",
+    "typescript": "^4.5.4"
+  }
+}

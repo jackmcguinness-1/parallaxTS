@@ -1,0 +1,78 @@
+html,body
+{
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
+.parallaxScene{
+    position: relative;
+    display:grid;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+.parallaxElement {
+    display: flex;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+#backgroundImg{
+    position: relative;
+    display: block;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+}
+
+#circleImg{
+    position: relative;
+    display: block;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 7.5%;
+    height: width;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#circleImg1{
+    position: relative;
+    display: block;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 7.5%;
+    height: width;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#circleImg2{
+    position: relative;
+    display: block;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 7.5%;
+    height: width;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
