@@ -1,1 +1,1 @@
-{"version":3,"file":"ParallaxElement.js","sourceRoot":"","sources":["../src/ParallaxElement.ts"],"names":[],"mappings":""}
+{"version":3,"file":"ParallaxElement.js","sourceRoot":"","sources":["../src/ParallaxElement.ts"],"names":[],"mappings":"AAsCA,MAAM,CAAC,MAAM,YAAY,GAAkB,GAAE,EAAE,GAAC,CAAC,CAAC;AAElD,MAAM,CAAC,MAAM,kBAAkB,GAAmB;IAC9C,OAAO,EAAE,YAAY;IACrB,WAAW,EAAE,YAAY;IACzB,YAAY,EAAE,YAAY;IAC1B,YAAY,EAAE,YAAY;IAC1B,QAAQ,EAAE,YAAY;CACzB,CAAA"}

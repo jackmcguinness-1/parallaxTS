@@ -1,4 +1,5 @@
-import { config } from "./ParallaxConfig.js";
+import { nullSceneListeners } from "./ParallaxElement.js";
+import { configs } from "./ParallaxConfig.js";
 import { Util } from "./Util.js";
 class ParallaxHandler {
     constructor(frames) {
@@ -6,7 +7,8 @@ class ParallaxHandler {
         for (let i = 0; i < frames.length; i++) {
             const element = frames[i];
             const children = element.children;
-            const frame = { element: element, children: [], zIndex: 0, frameId: i };
+            const scrollHeight = window.scrollY;
+            const frame = { element: element, children: [], zIndex: 0, scrollHeight: scrollHeight, frameId: i };
             const scene = this.constructScene(frame);
             element.ondragstart = () => { return false; };
             for (let j = 0; j < children.length; j++) {
@@ -62,12 +64,14 @@ class ParallaxHandler {
         scene.frame.element.addEventListener("mousemove", scene.listeners.onMouseMove);
         scene.frame.element.addEventListener("mouseleave", scene.listeners.onMouseLeave);
         scene.frame.element.addEventListener("mouseenter", scene.listeners.onMouseEnter);
+        document.addEventListener("scroll", scene.listeners.onScroll);
     }
     deactivateListeners(scene) {
         scene.frame.element.removeEventListener("click", scene.listeners.onClick);
         scene.frame.element.removeEventListener("mousemove", scene.listeners.onMouseMove);
         scene.frame.element.removeEventListener("mouseleave", scene.listeners.onMouseLeave);
         scene.frame.element.removeEventListener("mouseenter", scene.listeners.onMouseEnter);
+        document.removeEventListener("scroll", scene.listeners.onScroll);
     }
     constructScene(frame) {
         const listeners = this.getSceneListeners(frame);
@@ -75,7 +79,7 @@ class ParallaxHandler {
     }
     getScene(frame) {
         // gets the stored scene if it has been made already, or constructs a new one if not
-        let scene = { frame: frame, listeners: this.getSceneListeners(frame), mousePos: { x: 0, y: 0 }, sceneId: -1 };
+        let scene = { frame: frame, listeners: nullSceneListeners, mousePos: { x: 0, y: 0 }, sceneId: -1 };
         let sceneFound = false;
         this.parallaxScenes.forEach((storedScene) => {
             if (Util.isEqual(storedScene.frame, frame)) {
@@ -93,11 +97,13 @@ class ParallaxHandler {
         const click = (ev) => { this.handleClick(ev, frame); };
         const mouseLeave = (ev) => { this.handleMouseLeave(ev, frame); };
         const mouseEnter = (ev) => { this.handleMouseEnter(ev, frame); };
+        const scroll = (ev) => { this.handleScroll(ev, frame); };
         const listeners = {
             onClick: click,
             onMouseMove: mouseMove,
             onMouseEnter: mouseEnter,
-            onMouseLeave: mouseLeave
+            onMouseLeave: mouseLeave,
+            onScroll: scroll
         };
         return listeners;
     }
@@ -128,8 +134,9 @@ class ParallaxHandler {
             //update top and left
             const dx = ev.x - scene.mousePos.x;
             const dy = ev.y - scene.mousePos.y;
+            const config = configs[frame.frameId];
             const gamma = Math.pow(child.zIndex, 2);
-            const speed = config.PARALLAX_SPEED;
+            const speed = config.MOUSEMOVE_PARALLAX_SPEED;
             const scale = window.innerWidth / 1920; // wack a scale factor here so we dont get mad issues with different screen sizes
             // move our parallax elements
             if (config.HORIZONTAL_PARALLAX_ENABLED) {
@@ -144,6 +151,25 @@ class ParallaxHandler {
         //after each child is updated, update the scene mousePos for the next mouseMove event
         scene.mousePos.x = ev.x;
         scene.mousePos.y = ev.y;
+    }
+    handleScroll(ev, frame) {
+        const config = configs[frame.frameId];
+        if (config.SCROLL_ENABLED) {
+            const ds = window.scrollY - frame.scrollHeight;
+            frame.children.forEach((child) => {
+                const gamma = Math.pow(child.zIndex, 2);
+                const speed = config.SCROLL_PARALLAX_SPEED;
+                const scale = window.innerWidth / 1920; // wack a scale factor here so we dont get mad issues with different screen sizes
+                if (config.HORIZONTAL_PARALLAX_ENABLED) {
+                    child.left += speed * scale * child.orientation * ds * gamma;
+                    child.element.style.left = `${child.left}px`;
+                }
+            });
+            frame.scrollHeight = window.scrollY;
+        }
+        else {
+            return;
+        }
     }
     getRelativeMousePos(absoluteMousePos, frame) {
         const elementPos = Util.getPosition(frame.element);

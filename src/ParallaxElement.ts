@@ -4,6 +4,7 @@ export type ParallaxFrame = {
     element: Element
     children: ParallaxElement[],
     zIndex: number,
+    scrollHeight: number,
     frameId: number
 }
 
@@ -27,9 +28,20 @@ export type SceneListeners = {
     onClick: SceneListener,
     onMouseMove: SceneListener,
     onMouseEnter: SceneListener,
-    onMouseLeave: SceneListener
+    onMouseLeave: SceneListener,
+    onScroll: SceneListener
 }
 
 export interface SceneListener {
     (ev: Event | MouseEvent): void;
+}
+
+export const nullListener: SceneListener = ()=>{};
+
+export const nullSceneListeners: SceneListeners = {
+    onClick: nullListener,
+    onMouseMove: nullListener,
+    onMouseEnter: nullListener,
+    onMouseLeave: nullListener,
+    onScroll: nullListener
 }
