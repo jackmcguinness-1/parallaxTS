@@ -76,3 +76,16 @@ html,body
     margin-top: auto;
     margin-bottom: auto;
 }
+
+#parallaxText{
+    position: relative;
+    display: block;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    width: 7.5%;
+    height: width;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1px;
+    margin-bottom: auto;
+}
