@@ -37,7 +37,6 @@ class ParallaxHandler {
             }
             this.parallaxScenes.push(scene);
         }
-        console.log(this.parallaxScenes);
     }
     startAllScenes() {
         this.parallaxScenes.forEach((scene) => {
@@ -50,12 +49,10 @@ class ParallaxHandler {
         });
     }
     startScene(scene) {
-        console.log("starting scene");
         this.activateListeners(scene);
         return;
     }
     endScene(scene) {
-        console.log("ending scene");
         this.deactivateListeners(scene);
         return;
     }
@@ -112,20 +109,17 @@ class ParallaxHandler {
         const scene = this.getScene(frame);
         scene.mousePos.x = ev.x;
         scene.mousePos.y = ev.y;
-        console.log("mouse left scene");
     }
     handleMouseEnter(ev, frame) {
         //handle mouse enter
         const scene = this.getScene(frame);
         scene.mousePos.x = ev.x;
         scene.mousePos.y = ev.y;
-        console.log("mouse entered scene");
     }
     handleClick(ev, frame) {
         const mouseEvent = ev;
         const mousePos = { x: mouseEvent.pageX, y: mouseEvent.pageY };
         this.getRelativeMousePos(mousePos, frame);
-        console.log("click");
     }
     handleMouseMove(ev, frame) {
         // the logic for moving all the sub-elements goes here
@@ -174,7 +168,6 @@ class ParallaxHandler {
     getRelativeMousePos(absoluteMousePos, frame) {
         const elementPos = Util.getPosition(frame.element);
         const relativeMousePos = { x: absoluteMousePos.x - elementPos.x, y: absoluteMousePos.y - elementPos.y };
-        console.log(relativeMousePos);
         return relativeMousePos;
     }
 }

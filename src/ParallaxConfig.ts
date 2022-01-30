@@ -1,6 +1,6 @@
 export const configs = [
     {
-        VERTICAL_PARALLAX_ENABLED: false,
+        VERTICAL_PARALLAX_ENABLED: true,
         HORIZONTAL_PARALLAX_ENABLED: true,
         MOUSEMOVE_PARALLAX_SPEED: 0.1,
         SCROLL_PARALLAX_SPEED: 0.5,

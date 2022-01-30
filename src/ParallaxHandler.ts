@@ -46,7 +46,6 @@ class ParallaxHandler{
             }
             this.parallaxScenes.push(scene);
         }
-        console.log(this.parallaxScenes);
     }
 
     startAllScenes(): void{
@@ -62,13 +61,11 @@ class ParallaxHandler{
     }
 
     startScene(scene: ParallaxScene): void{
-        console.log("starting scene");
         this.activateListeners(scene);
         return;
     }
 
     endScene(scene: ParallaxScene): void{
-        console.log("ending scene");
         this.deactivateListeners(scene);
         return;
     }
@@ -131,7 +128,6 @@ class ParallaxHandler{
         const scene: ParallaxScene = this.getScene(frame);
         scene.mousePos.x = (ev as MouseEvent).x;
         scene.mousePos.y = (ev as MouseEvent).y;
-        console.log("mouse left scene");
     }
 
     handleMouseEnter(ev: Event, frame: ParallaxFrame): void{
@@ -139,14 +135,12 @@ class ParallaxHandler{
         const scene: ParallaxScene = this.getScene(frame);
         scene.mousePos.x = (ev as MouseEvent).x;
         scene.mousePos.y = (ev as MouseEvent).y;
-        console.log("mouse entered scene");
     }
 
     handleClick(ev: Event, frame: ParallaxFrame): void{
         const mouseEvent: MouseEvent = (ev as MouseEvent);
         const mousePos = {x: mouseEvent.pageX, y: mouseEvent.pageY}
         this.getRelativeMousePos(mousePos, frame);
-        console.log("click");
     }
 
     handleMouseMove(ev: Event, frame: ParallaxFrame): void{
@@ -207,7 +201,6 @@ class ParallaxHandler{
     getRelativeMousePos(absoluteMousePos: vec2, frame: ParallaxFrame): vec2{
         const elementPos: vec2 = Util.getPosition(frame.element);
         const relativeMousePos: vec2 = {x: absoluteMousePos.x - elementPos.x, y: absoluteMousePos.y - elementPos.y};
-        console.log(relativeMousePos);
         return relativeMousePos
     }
 
